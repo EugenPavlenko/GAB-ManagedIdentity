@@ -1,0 +1,13 @@
+﻿@model System.Collections.Generic.List<string>
+
+@{
+    ViewBag.Title = "Blobs list";
+    Layout = "_Layout";
+    var containerName = ViewData["containerName"].ToString();
+}
+
+<h2>Blobs list</h2>
+@foreach (var item in Model)
+{
+    <span> @item - <a asp-action="Download" asp-route-containerName=@containerName asp-route-blobName="@item" target="_blank">Download </a></span>
+}

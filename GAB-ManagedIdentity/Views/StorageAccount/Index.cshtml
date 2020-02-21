@@ -1,0 +1,12 @@
+﻿@model List<string>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Containers</h2>
+@foreach (var item in Model)
+{
+    <a asp-action="Blobs" asp-route-containerName="@item">@item</a>
+}
