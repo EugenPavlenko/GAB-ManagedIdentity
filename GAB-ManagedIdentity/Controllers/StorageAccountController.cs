@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using GAB_ManagedIdentity.StorageProvider;
@@ -25,13 +26,13 @@ namespace GAB_ManagedIdentity.Controllers
             return View(await blobStorageProvider.GetBlobsInContainerAsync(containerName));
         }
 
-
         public async Task<IActionResult> Download(string containerName, string blobName)
         {
             ViewData["containerName"] = containerName;
-            var b = await blobStorageProvider.GetBlobContentAsync(containerName, blobName);
-
-            return new FileStreamResult(b.Value.Content, b.Value.ContentType);
+            var blobContentAsync = await blobStorageProvider.GetBlobContentAsync(containerName, blobName);
+            var blobDownloadInfo = blobContentAsync.Value;
+            var fileInfo = new FileInfo(blobName);
+            return File(blobDownloadInfo.Content, blobDownloadInfo.ContentType, fileInfo.Name);
         }
     }
 }

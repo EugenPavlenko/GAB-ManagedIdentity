@@ -9,5 +9,5 @@
 <h2>Blobs list</h2>
 @foreach (var item in Model)
 {
-    <span> @item - <a asp-action="Download" asp-route-containerName=@containerName asp-route-blobName="@item" target="_blank">Download </a></span>
+    <span> @item - <a asp-action="Download" asp-route-containerName=@containerName asp-route-blobName="@item" target="_blank">Download </a></span> <br/>
 }
